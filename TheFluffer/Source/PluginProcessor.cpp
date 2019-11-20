@@ -25,12 +25,13 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
 #endif
 {
     
-    state = new AudioProcessorValueTreeState(*this, nullptr);
-    
-    state->createAndAddParameter("drive", "Drive", "Drive", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr), );
-    state->createAndAddParameter("range", "Range", "Range", NormalisableRange<float>(0.f, 3000.f, 0.0001, 1.0, nullptr));
-    state->createAndAddParameter("blend", "Blend", "Blend", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr));
-    state->createAndAddParameter("volume", "Volume", "Volume", NormalisableRange<float>(0.f, 3.f, 0.0001, 1.0, nullptr));
+    state = new AudioProcessorValueTreeState(*this, nullptr, "PARAMETERS",
+    {
+        std::make_unique<AudioParameterFloat>("drive", "Drive", "Drive", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
+        std::make_unique<AudioParameterFloat>("range", "Range", "Range", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
+        std::make_unique<AudioParameterFloat>("blend", "Blend", "Blend", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
+        std::make_unique<AudioParameterFloat>("volume", "Volume", "Volume", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr))
+    });
     
     state->state = ValueTree("drive");
     state->state = ValueTree("range");
@@ -228,7 +229,7 @@ void NewProjectAudioProcessor::setStateInformation (const void* data, int sizeIn
     if (tree.isValid())
     {
         
-        state->state = tree;
+        state->state = tree;
         
     }
     
