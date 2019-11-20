@@ -27,10 +27,10 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
     
     state = new AudioProcessorValueTreeState(*this, nullptr, "PARAMETERS",
     {
-        std::make_unique<AudioParameterFloat>("drive", "Drive", "Drive", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
-        std::make_unique<AudioParameterFloat>("range", "Range", "Range", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
-        std::make_unique<AudioParameterFloat>("blend", "Blend", "Blend", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr)),
-        std::make_unique<AudioParameterFloat>("volume", "Volume", "Volume", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr))
+        std::make_unique<AudioParameterFloat>("drive", "Drive", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr), 0.f),
+        std::make_unique<AudioParameterFloat>("range", "Range", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr), 0.f),
+        std::make_unique<AudioParameterFloat>("blend", "Blend", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr), 0.f),
+        std::make_unique<AudioParameterFloat>("volume", "Volume", NormalisableRange<float>(0.f, 1.f, 0.0001, 1.0, nullptr), 0.f)
     });
     
     state->state = ValueTree("drive");
